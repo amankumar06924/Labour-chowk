@@ -9,9 +9,37 @@ import {
   Progress,
 } from "@material-tailwind/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { authorsTableData, projectsTableData } from "@/data";
+import { useEffect, useState } from "react";
+import { authorsTableData as fetchAuthors } from "@/data/authors-table-data";
+
+// for demo
+// import { fetchAuthors, demoData } from "@/data/authors-table-data";
 
 export function Tables() {
+  const [authorsTableData, setAuthorsTableData] = useState([]);
+useEffect(() => {
+  fetchAuthors().then((data) => {
+    console.log("API DATA:", data);
+    setAuthorsTableData(data);
+  });
+}, []);
+
+/** this is for demao  */
+// useEffect(() => {
+//   fetchAuthors()
+//     .then((data) => {
+//       if (data.length === 0) {
+//         setAuthorsTableData(demoData); // fallback
+//       } else {
+//         setAuthorsTableData(data);
+//       }
+//     })
+//     .catch(() => {
+//       setAuthorsTableData(demoData);
+//     });
+// }, []);
+/***************************** */
+
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       <Card>
